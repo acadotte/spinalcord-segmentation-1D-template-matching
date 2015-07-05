@@ -1,0 +1,16 @@
+PROJECT(SpineExtraction)
+
+cmake_minimum_required(VERSION 2.8)
+
+# Compiler flags
+if(CMAKE_COMPILER_IS_GNUCXX)
+#    set(CMAKE_CXX_FLAGS "-g")        ## Optimize
+#    set(CMAKE_CXX_FLAGS "-O3 -fopenmp")        ## Optimize
+    set(CMAKE_CXX_FLAGS "-O3")        ## Optimize
+    set(CMAKE_EXE_LINKER_FLAGS "-s")  ## Strip binary
+    set(CMAKE_EXE_SHARED_FLAGS "-s")  ## Strip binary
+    set(CMAKE_EXE_MODULE_FLAGS "-s")  ## Strip binary
+endif()
+
+
+ADD_SUBDIRECTORY(src)

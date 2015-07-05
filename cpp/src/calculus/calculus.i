@@ -1,0 +1,86 @@
+// Pyhton module name. Typically name of c++ file
+%module calculus
+%{
+// Needed for numpy support
+#define SWIG_FILE_WITH_INIT
+#include "calculus.h"
+%}
+
+//%include "numpy.i"
+%include "../numpy.i"
+
+// Needed for numpy support
+%init %{
+    import_array();
+%}
+
+%apply (int DIM1, int* IN_ARRAY1)
+        {(int templateEdgeIndex_i, int* templateEdgeIndex),
+        (int testArray_i, float* testArray)}
+        
+%apply (int DIM1, float* IN_ARRAY1)
+        {(int S_i, float* S)}
+
+%apply (int DIM1, int DIM2, float* IN_ARRAY2)
+        {(int templateArray_i, int templateArray_j,  float* templateArray),
+	 (int testArray_i, int testArray_j,  float* testArray),
+	 (int input_array_i, int input_array_j, float* input_array),
+	 (int inpts_i, int inpts_j, float* inpts)}
+
+%apply (int DIM1, int DIM2, int DIM3, float* IN_ARRAY3)
+        {(int i, int j, int k, float* data)}
+
+%apply (int DIM1, int DIM2, double* INPLACE_ARRAY2)
+        {(int A_i, int A_j, double* A),
+        (int matchPercentOut_i, int matchPercentOut_j, double* matchPercentOut)}
+
+%apply (int DIM1, int* INPLACE_ARRAY1)
+        {(int lastEdgeIndex_i, int* lastEdgeIndex)}
+
+%apply (int DIM1, int DIM2, int* INPLACE_ARRAY2)
+        {(int edgeIndexOut_i, int edgeIndexOut_j, int* edgeIndexOut),
+        (int matchOut_i, int matchOut_j, int* matchOut),
+        (int matched_template_out_i, int matched_template_out_j, int* matched_template_out),
+	(int matchPercentOut_i, int matchPercentOut_j, int* matchPercentOut)}
+
+%apply (int DIM1, int DIM2, int DIM3, int* INPLACE_ARRAY3)
+        {(int matchPercentOut_i, int matchPercentOut_j, int matchPercentOut_k, int* matchPercentOut)}
+        
+%apply (int DIM1, int DIM2, float* INPLACE_ARRAY2)
+        {(int matchOut_i, int matchOut_j, float* matchOut)}
+
+%apply (int DIM1, int DIM2, int DIM3, unsigned short* INPLACE_ARRAY3)
+        {(int r, int s,  int t, unsigned short* output_label),
+         (int a, int b, int c, unsigned short* label_1),
+         (int d, int e, int f, unsigned short* label_2)}
+
+%apply (int* DIM1, int* DIM2, float** ARGOUTVIEWM_ARRAY2)
+        {(int* matchPercent_i, int* matchPercent_j, float **matchPercent),
+	(int* pts_i, int* pts_j, float **pts),
+        (int* output_array_i, int* output_array_j, float **output_array)}
+
+
+%apply (int* DIM1, int** ARGOUTVIEWM_ARRAY1)
+        {(int* newEdge_i, int **newEdge)}
+
+%apply (int* DIM1, int* DIM2, int** ARGOUTVIEWM_ARRAY2)
+	{(int* templateIndex_i, int* templateIndex_j, int **templateIndex),
+	 (int* edgeIndex_i, int* edgeIndex_j, int **edgeIndex)}
+
+
+%include "std_string.i"
+
+// Allows to catch C++ exceptoins of strings
+# setup exceptions handler
+%exception {
+	try{
+		$action
+		}
+	catch (const char*& err_msg) {
+		PyErr_SetString(PyExc_RuntimeError, err_msg);
+		return NULL;
+   }
+}
+
+%include "calculus.h"
+

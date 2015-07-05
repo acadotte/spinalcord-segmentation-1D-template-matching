@@ -1,0 +1,46 @@
+#ifndef _CALCULUS_H_
+#define _CALCULUS_H_
+
+#include <vector>
+
+void alter_in_place(int A_i, int A_j, double* A);
+
+double scalar_product(std::vector<double> a, std::vector<double> b);
+
+void gradient_calc(int S_i, float* S, int i, int j, int k, float* data, int r, int s,  int t, unsigned short* output_label);
+
+void convolve_arrays_fast(float matchThreshold, int offsetThreshold, int method, int testArray_i, int testArray_j, float* testArray, 
+	int templateArray_i, int templateArray_j, float* templateArray, int templateEdgeIndex_i, int* templateEdgeIndex, int* matchPercent_i, int* matchPercent_j, float **matchPercent,
+	int* templateIndex_i, int* templateIndex_j, int **templateIndex, int* edgeIndex_i, int* edgeIndex_j, int **edgeIndex, int* newEdge_i, int **newEdge);
+
+void convolve_arrays_fast_2(float matchThreshold, int method, int testArray_i, int testArray_j, float* testArray, 
+	int templateArray_i, int templateArray_j, float* templateArray, int templateEdgeIndex_i, int* templateEdgeIndex, int* matchPercent_i, int* matchPercent_j, float **matchPercent,
+	int* templateIndex_i, int* templateIndex_j, int **templateIndex, int* edgeIndex_i, int* edgeIndex_j, int **edgeIndex, int* newEdge_i, int **newEdge);
+
+void convolve_arrays_recursive(float matchThreshold, float matchThresholdOriginal, int minimumMatches, int method, int loopCounter, int lastEdgeIndex, int testArray_i, int testArray_j, float* testArray,
+	int templateArray_i, int templateArray_j, float* templateArray, int templateEdgeIndex_i, int* templateEdgeIndex, int edgeIndexOut_i, int edgeIndexOut_j, int* edgeIndexOut,
+	int matchOut_i, int matchOut_j, float* matchOut, int matched_template_out_i, int matched_template_out_j, int* matched_template_out, int matchPercentOut_i, int matchPercentOut_j, int* matchPercentOut);
+
+void smoothing_filter_1D(int axial_smoothing, int method, int kernel_size, int input_array_i, int input_array_j, float* input_array, int* output_array_i, int* output_array_j, float **output_array);
+
+float GetMedian(float daArray[], int arraySize, int iSize);
+
+float GetMean(float daArray[], int iSize);
+
+float jaccard_index(int a, int b, int c, unsigned short* label_1, int d, int e, int f, unsigned short* label_2);
+
+float dice_coeff(int a, int b, int c, unsigned short* label_1, int d, int e, int f, unsigned short* label_2, int r, int s,  int t, unsigned short* output_label);
+
+float area_difference_output(int targ_y_idx, int a, int b, int c, unsigned short* label_1, int d, int e, int f, unsigned short* label_2, int r, int s,  int t, unsigned short* output_label);
+
+float find_nearest_surface(int offset, int min_y, int max_y, int S_i, float* S, int a, int b, int c, int d, int e, int f, unsigned short* label_2);
+
+float haus_dist(int offset, int average_out, int S_i, float* S, int a, int b, int c, unsigned short* label_1, int d, int e, int f, unsigned short* label_2);
+
+void centroid_calc(int a, int b, int c, unsigned short* label_1, int r, int s,  int t, unsigned short* output_label, int* pts_i, int* pts_j, float **pts);
+
+int get_filled_voxels(int a, int b, int c, unsigned short* label_1);
+
+void create_submask_between_planes(int a, int b, int c, unsigned short* label_1, int r, int s,  int t, unsigned short* output_label, int inpts_i, int inpts_j, float *inpts);
+
+#endif // _CALCULUS_H_

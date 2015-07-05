@@ -1,0 +1,34 @@
+// Pyhton module name. Typically name of c++ file
+%module swig_example
+%{
+// Needed for numpy support
+#define SWIG_FILE_WITH_INIT
+#include "swig_example.h"
+%}
+
+%include "numpy.i"
+
+// Needed for numpy support
+%init %{
+    import_array();
+%}
+
+%apply (int DIM1, int DIM2, double* INPLACE_ARRAY2)
+        {(int A_i, int A_j, double* A)}
+
+%include "std_string.i"
+
+// Allows to catch C++ exceptoins of strings
+# setup exceptions handler
+%exception {
+	try{
+		$action
+		}
+	catch (const char*& err_msg) {
+		PyErr_SetString(PyExc_RuntimeError, err_msg);
+		return NULL;
+   }
+}
+
+%include "swig_example.h"
+
