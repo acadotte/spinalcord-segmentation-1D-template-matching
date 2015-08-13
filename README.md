@@ -10,7 +10,7 @@ You are required to use cMake to build the C++ soure code on your platform. The 
 
 Once installed properly, you will need to edit the list of subjects used in the python file, corresponding to the names of actual subject folders. The original data folder location is stored in the setup_03.py file, which will need to be modified.
 
-The algorithm uses images which have been saved as NRRD files. This can be accomplished in many ways, but the author used 3D Slicer for all image manipulation.
+The algorithm uses images which have been saved as NRRD files. This can be accomplished in many ways, but the author used 3D Slicer for all image manipulation. For the purposes of this repository, the images have been compressed into nii.gz format, and need to be converted back to NRRD format for use in the program. This can be accomplished using 3D Slicer.
 
 The algorithm was built with certain image acquisitions parameters in mind and therefore it is likely that if different parameters were used, re-orienting the image might be required. This involves changing the orientation parameters in the algorithm.
 
