@@ -6,7 +6,7 @@ The main algorithm is written in Python, with subroutines written in C++.
 Below are the basic steps for running the algoithm.
 To execute the program, you will need Python 2.7. The packages listed at the bottom of this document are required in various parts of the program and need to be installed.
 
-You are required to use cMake to build the C++ soure code on your platform.
+You are required to use cMake to build the C++ soure code on your platform. The process of doing this will be machine dependent.
 
 Once installed properly, you will need to edit the list of subjects used in the python file, corresponding to the names of actual subject folders. The original data folder location is stored in the setup_03.py file, which will need to be modified.
 
